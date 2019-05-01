@@ -4,7 +4,7 @@ namespace App\Event;
 
 use App\Model\Contract\User;
 
-class NewUserSaved
+class NewUserSavedEvent
 {
     /** @var User */
     private $user;

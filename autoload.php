@@ -9,6 +9,7 @@ $paths = [
     getcwd() . '/app/Event/',
     getcwd() . '/app/Model/Contract/',
     getcwd() . '/app/Model/',
+    getcwd() . '/app/Repository/Contract/',
     getcwd() . '/app/Repository/',
     getcwd() . '/app/Writer/',
 ];

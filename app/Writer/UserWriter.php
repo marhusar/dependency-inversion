@@ -2,24 +2,23 @@
 
 namespace App\Writer;
 
-use App\Event\NewUserSaved;
+use App\Event\NewUserSavedEvent;
 use App\Model\Contract\User;
-use App\Repository\UserRepository;
-use Illuminate\Events\Dispatcher;
+use App\Repository\Contract\UserRepository;
 
 class UserWriter
 {
     /** @var UserRepository */
     private $userRepository;
 
-    /** @var Dispatcher */
+    /** @var \App\Event\Dispatcher */
     private $eventDispatcher;
 
     /**
-     * @param UserRepository $userRepository
-     * @param Dispatcher     $eventDispatcher
+     * @param UserRepository        $userRepository
+     * @param \App\Event\Dispatcher $eventDispatcher
      */
-    public function __construct(UserRepository $userRepository, Dispatcher $eventDispatcher)
+    public function __construct(UserRepository $userRepository, \App\Event\Dispatcher $eventDispatcher)
     {
         $this->userRepository  = $userRepository;
         $this->eventDispatcher = $eventDispatcher;
@@ -27,11 +26,13 @@ class UserWriter
 
     /**
      * @param User $user
+     *
+     * @return bool
      */
     public function addUser(User $user)
     {
         $result = $this->saveUser($user);
-        $event  = new NewUserSaved($user);
+        $event  = new NewUserSavedEvent($user);
 
         $this->eventDispatcher->dispatch($event,[$user]);
 
