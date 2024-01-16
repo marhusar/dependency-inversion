@@ -3,8 +3,9 @@
 namespace App\Repository;
 
 use App\Model\User;
+use App\Repository\Contract\UserRepository as UserWriterRepository;
 
-class UserRepository
+class UserRepository implements UserWriterRepository
 {
     /**
      * @var  User
